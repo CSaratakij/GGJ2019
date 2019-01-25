@@ -11,7 +11,7 @@ namespace GGJ
         public static event _Func OnGameStop;
 
 
-        public void GameStart()
+        public static void GameStart()
         {
             if (IsGameStart)
                 return;
@@ -22,7 +22,7 @@ namespace GGJ
                 OnGameStart();
         }
 
-        public void GameStop()
+        public static void GameStop()
         {
             if (!IsGameStart)
                 return;
