@@ -1,11 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace GGJ
 {
     public class CameraFollow : MonoBehaviour
     {
+        [SerializeField]
+        bool isScrollUp;
+
+        [SerializeField]
+        float scrollUpSpeed;
+
         [SerializeField]
         Transform target;
 
@@ -26,7 +30,12 @@ namespace GGJ
 
         void LateUpdate()
         {
-            FollowTarget();
+            if (isScrollUp) {
+                ScrollUp();
+            }
+            else {
+                FollowTarget();
+            }
         }
 
         void Initialize()
@@ -40,8 +49,14 @@ namespace GGJ
         void FollowTarget()
         {
             targetPosition = Vector3.Lerp(transform.position, target.position + offset, damp);
+            targetPosition.x = 0.0f;
             targetPosition.z = -10.0f;
             transform.position = targetPosition;
+        }
+
+        void ScrollUp()
+        {
+            transform.position += Vector3.up * scrollUpSpeed * Time.deltaTime;
         }
 
         public void ResetOffset(bool value)
