@@ -248,7 +248,7 @@ namespace GGJ
             groundRaycastDirection.x = isFacingRight ? -1.0f : 1.0f;
 
             raycastGroundHit = Physics2D.BoxCast(ground.position, boxCastBodySize, 0.0f, Vector2.down, 0.02f, groundLayer);
-            raycastHeadHit = Physics2D.BoxCast(head.position, boxCastHeadSize, 0.0f, Vector2.up, 0.03f, headButtLayer);
+            raycastHeadHit = Physics2D.BoxCast(head.position, boxCastHeadSize, 0.0f, Vector2.up, 0.02f, headButtLayer);
             raycastFallingCheck = Physics2D.BoxCast(ground.position, boxCastBodySize, 0.0f, Vector2.down, 1.2f, groundLayer); 
             raycastOneWayCollision = Physics2D.BoxCast(ground.position, boxCastBodySize, 0.0f, Vector2.down, 0.03f, oneWayCollisionLayer);
 
