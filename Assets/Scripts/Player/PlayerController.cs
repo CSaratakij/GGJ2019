@@ -97,6 +97,8 @@ namespace GGJ
         RaycastHit2D raycastOneWayCollision;
 
         Stat stat;
+        StatManipulator statManipulator;
+
         SpriteRenderer spriteRenderer;
 
         Color flickeringColor;
@@ -120,6 +122,7 @@ namespace GGJ
         {
             //Test
             GameController.GameStart();
+            GetComponent<StatManipulator>().StartManipulate();
         }
 
         void Update()
@@ -138,12 +141,13 @@ namespace GGJ
         {
             rigid = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
+            stat = GetComponent<Stat>();
+            statManipulator = GetComponent<StatManipulator>();
             groundRaycastDirection = new Vector3(-1.0f, -1.0f);
             boxCastHeadSize = new Vector2(0.855f, 1.0f);
             boxCastBodySize = new Vector2(0.855f, 0.4f);
             flickeringColor = new Color(1.0f, 1.0f, 1.0f, 0.2f);
             flickeringWait = new WaitForSeconds(0.8f);
-            stat = GetComponent<Stat>();
         }
 
         void health_OnValueChanged(int value)
