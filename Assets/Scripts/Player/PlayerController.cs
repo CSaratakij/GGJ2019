@@ -116,13 +116,12 @@ namespace GGJ
         void Awake()
         {
             Initialize();
+            SubscribeEvent();
         }
 
-        void Start()
+        void OnDestroy()
         {
-            //Test
-            GameController.GameStart();
-            GetComponent<StatManipulator>().StartManipulate();
+            UnsubscribeEvent();
         }
 
         void Update()
@@ -144,20 +143,37 @@ namespace GGJ
             stat = GetComponent<Stat>();
             statManipulator = GetComponent<StatManipulator>();
             groundRaycastDirection = new Vector3(-1.0f, -1.0f);
-            boxCastHeadSize = new Vector2(0.855f, 1.0f);
-            boxCastBodySize = new Vector2(0.855f, 0.4f);
+            //boxCastHeadSize = new Vector2(0.855f, 1.0f);
+            boxCastHeadSize = new Vector2(0.455f, 1.0f);
+            //boxCastBodySize = new Vector2(0.855f, 0.4f);
+            boxCastBodySize = new Vector2(0.455f, 0.4f);
             flickeringColor = new Color(1.0f, 1.0f, 1.0f, 0.2f);
             flickeringWait = new WaitForSeconds(0.8f);
         }
 
-        void health_OnValueChanged(int value)
+        void SubscribeEvent()
+        {
+            stat.OnValueChagned += health_OnValueChanged;
+            GameController.OnGameStart += OnGameStart;
+            GameController.OnGameStop += OnGameStop;
+        }
+
+        void UnsubscribeEvent()
+        {
+            stat.OnValueChagned -= health_OnValueChanged;
+            GameController.OnGameStart -= OnGameStart;
+            GameController.OnGameStop -= OnGameStop;
+        }
+
+        void health_OnValueChanged(float value)
         {
             if (isDead)
                 return;
 
-            if (value <= 0 && !isDead) {
+            if (value <= 0.0f && !isDead) {
                 isDead = true;
                 spriteRenderer.sortingOrder = 1;
+                GameController.GameStop();
             }
         }
 
@@ -328,6 +344,16 @@ namespace GGJ
             float oldRange = (oldMax - oldMin);
             float newRange = (newMax - newMin);
             return (((value - oldMin) * newRange) / oldRange) + newMin;
+        }
+
+        void OnGameStart()
+        {
+            statManipulator.StartManipulate();
+        }
+
+        void OnGameStop()
+        {
+            statManipulator.Stop();
         }
     }
 }

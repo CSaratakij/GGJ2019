@@ -5,10 +5,13 @@ namespace GGJ
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField]
-        bool isScrollUp;
+        bool isScroll;
 
         [SerializeField]
-        float scrollUpSpeed;
+        ScrollDirection scrollDirection;
+
+        [SerializeField]
+        float scrollSpeed;
 
         [SerializeField]
         Transform target;
@@ -22,6 +25,11 @@ namespace GGJ
         Vector3 targetPosition;
         Vector3 previousOffset;
 
+        enum ScrollDirection
+        {
+            Up,
+            Down
+        }
 
         void Awake()
         {
@@ -30,12 +38,7 @@ namespace GGJ
 
         void LateUpdate()
         {
-            if (isScrollUp) {
-                ScrollUp();
-            }
-            else {
-                FollowTarget();
-            }
+            MovementHandler();
         }
 
         void Initialize()
@@ -46,6 +49,17 @@ namespace GGJ
             }
         }
 
+        void MovementHandler()
+        {
+            if (!GameController.IsGameStart)
+                return;
+
+            if (isScroll)
+                ScrollHandler();
+            else
+                FollowTarget();
+        }
+
         void FollowTarget()
         {
             targetPosition = Vector3.Lerp(transform.position, target.position + offset, damp);
@@ -54,9 +68,18 @@ namespace GGJ
             transform.position = targetPosition;
         }
 
-        void ScrollUp()
+        void ScrollHandler()
         {
-            transform.position += Vector3.up * scrollUpSpeed * Time.deltaTime;
+            switch (scrollDirection)
+            {
+                case ScrollDirection.Up:
+                    transform.position += Vector3.up * scrollSpeed * Time.deltaTime;
+                    break;
+
+                case ScrollDirection.Down:
+                    transform.position += Vector3.down * scrollSpeed * Time.deltaTime;
+                    break;
+            }
         }
 
         public void ResetOffset(bool value)

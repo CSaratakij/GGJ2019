@@ -45,10 +45,6 @@ namespace GGJ
         {
             current = (current - value) < 0 ? 0 : (current - value);
             OnValueChagned?.Invoke(current);
-
-            //Test[:wa
-
-            Debug.Log("R");
         }
     }
 }
