@@ -46,7 +46,9 @@ namespace GGJ
         Vector2 velocity;
 
         Rigidbody2D rigid;
+
         Collider2D groundCollider;
+        Collider2D obstacleCollider;
 
 #if UNITY_EDITOR
         void OnDrawGizmos()
@@ -112,7 +114,11 @@ namespace GGJ
 
         void ObstacleCheckHandler()
         {
+            obstacleCollider = Physics2D.OverlapBox(transform.position, new Vector2(1.0f, 1.0f), 0.0f, obstacleMask);
 
+            if (obstacleCollider != null) {
+                Debug.Log("Hit..");
+            }
         }
 
         void MovementOnGround()
