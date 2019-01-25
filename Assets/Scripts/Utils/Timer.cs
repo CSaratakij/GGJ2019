@@ -23,8 +23,7 @@ namespace GGJ
 
         void OnDestroy()
         {
-            OnTimerStart = null;
-            OnTimerStop = null;
+            CleanUp();
         }
 
         void Update()
@@ -44,6 +43,12 @@ namespace GGJ
 
             if (current <= 0.0f)
                 Stop();
+        }
+
+        void CleanUp()
+        {
+            OnTimerStart = null;
+            OnTimerStop = null;
         }
 
         public void Countdown()

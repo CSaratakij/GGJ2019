@@ -11,6 +11,7 @@ namespace GGJ
         float maximum;
 
 
+        public bool IsEmpty => current <= 0.0f;
         public float Current => current;
         public float Max => maximum;
 

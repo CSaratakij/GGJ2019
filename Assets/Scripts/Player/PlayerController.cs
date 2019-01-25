@@ -222,7 +222,7 @@ namespace GGJ
 
         void MovementHandler()
         {
-            if (!GameController.IsGameStart) {
+            if (!GameController.IsGameStart || stat.IsEmpty) {
                 velocity.x = 0;
                 velocity.y = -onGroundGravity * Time.fixedDeltaTime;
                 rigid.velocity = velocity;
