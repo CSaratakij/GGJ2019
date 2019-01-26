@@ -148,7 +148,7 @@ namespace GGJ
             statManipulator = GetComponent<StatManipulator>();
             groundRaycastDirection = new Vector3(-1.0f, -1.0f);
             //boxCastHeadSize = new Vector2(0.855f, 1.0f);
-            boxCastHeadSize = new Vector2(0.455f, 1.0f);
+            boxCastHeadSize = new Vector2(0.455f, 0.5f);
             //boxCastBodySize = new Vector2(0.855f, 0.4f);
             boxCastBodySize = new Vector2(0.455f, 0.4f);
             flickeringColor = new Color(1.0f, 1.0f, 1.0f, 0.2f);
@@ -235,8 +235,6 @@ namespace GGJ
             else {
                 if (velocity.y > 0.0f)
                     anim.Play("Jump");
-                else
-                    anim.Play("FallDown");
             }
         }
 
@@ -258,13 +256,6 @@ namespace GGJ
 
         void MovementHandler()
         {
-            if (!GameController.IsGameStart || stat.IsEmpty) {
-                velocity.x = 0;
-                velocity.y = -onGroundGravity * Time.fixedDeltaTime;
-                rigid.velocity = velocity;
-                return;
-            }
-
             groundRaycastDirection.x = isFacingRight ? -1.0f : 1.0f;
 
             raycastGroundHit = Physics2D.BoxCast(ground.position, boxCastBodySize, 0.0f, Vector2.down, 0.02f, groundLayer);
@@ -286,6 +277,13 @@ namespace GGJ
             currentOneWayCollisionState = raycastOneWayCollision.collider != null;
 
             isBeginOneWayCollision = !previousOneWayCollsionState && currentOneWayCollisionState;
+
+            if (!GameController.IsGameStart || stat.IsEmpty) {
+                velocity.x = 0;
+                velocity.y = -onGroundGravity * Time.fixedDeltaTime;
+                rigid.velocity = velocity;
+                return;
+            }
 
             if (isGrounded) {
                 if (velocity.y > 0.0f && raycastOneWayCollision.collider != null && isBeginOneWayCollision) {
