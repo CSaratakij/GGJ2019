@@ -5,9 +5,6 @@ namespace GGJ
     public class CameraFollow : MonoBehaviour
     {
         [SerializeField]
-        bool isScroll;
-
-        [SerializeField]
         ScrollDirection scrollDirection;
 
         [SerializeField]
@@ -21,6 +18,8 @@ namespace GGJ
 
         [SerializeField]
         Vector3 offset;
+
+        bool isScroll;
 
         Vector3 targetPosition;
         Vector3 previousOffset;
@@ -51,13 +50,8 @@ namespace GGJ
 
         void MovementHandler()
         {
-            if (!GameController.IsGameStart)
-                return;
-
             if (isScroll)
                 ScrollHandler();
-            else
-                FollowTarget();
         }
 
         void FollowTarget()
@@ -91,6 +85,12 @@ namespace GGJ
             else {
                 offset = previousOffset;
             }
+        }
+
+        public void MakeScroll(bool value)
+        {
+            if (isScroll != value)
+                isScroll = value;
         }
     }
 }
