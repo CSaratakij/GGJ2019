@@ -22,7 +22,7 @@ namespace GGJ
         [SerializeField]
         float increaseValue;
 
-        enum ManipulateState
+        public enum ManipulateState
         {
             None,
             DecreaseOverTime,
@@ -113,6 +113,12 @@ namespace GGJ
 
             isStart = false;
             StopCoroutine(manipulateCallback);
+        }
+
+        public void SetManipulate(ManipulateState state)
+        {
+            if (state != manipulalteState)
+                manipulalteState = state;
         }
     }
 }

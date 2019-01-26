@@ -27,6 +27,7 @@ namespace GGJ
         public void Clear()
         {
             current = 0;
+            OnValueChagned?.Invoke(current);
         }
 
         public void FullRestore()
