@@ -246,8 +246,10 @@ namespace GGJ
                     anim.Play("Walk");
             }
             else {
-                if (velocity.y > 0.0f)
+                if (currentJumpVelocity < maxJumpVelocity)
                     anim.Play("Jump");
+                else
+                    anim.Play("FallDown");
             }
         }
 
@@ -398,7 +400,11 @@ namespace GGJ
                 GameController.GameStop();
             }
             else if (collision.gameObject.CompareTag("House")) {
-                stat.FullRestore();
+                if (stat.Current < stat.Max) {
+                    //fade..
+                    //then
+                    stat.FullRestore();
+                }
             }
         }
 
