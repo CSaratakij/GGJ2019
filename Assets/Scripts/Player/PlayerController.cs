@@ -53,6 +53,12 @@ namespace GGJ
         [SerializeField]
         LayerMask enemyLayer;
 
+        [SerializeField]
+        AudioClip jumpAudio;
+
+        [SerializeField]
+        AudioClip landingAudio;
+
         int totalJump;
         int totalCoin;
 
@@ -84,6 +90,7 @@ namespace GGJ
         bool isBeginOneWayCollision;
 
         Animator anim;
+        AudioSource audio;
 
         Vector2 velocity;
         Vector2 inputVector;
@@ -143,6 +150,7 @@ namespace GGJ
         void Initialize()
         {
             anim = GetComponent<Animator>();
+            audio = GetComponent<AudioSource>();
             rigid = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             stat = GetComponent<Stat>();
@@ -220,6 +228,7 @@ namespace GGJ
 
             if (isJumpKeyDown && totalJump < 1) {
                 allowPlayJumpAudio = true;
+
             }
 
             if (isJumpKeyUp) {
@@ -319,6 +328,11 @@ namespace GGJ
 
                     if (allowPlayJumpAudio) {
                         anim.Play("Jump");
+
+                        if (audio.isPlaying)
+                            audio.Stop();
+
+                        audio.PlayOneShot(jumpAudio);
                         allowPlayJumpAudio = false;
                     }
                 }
