@@ -1,5 +1,9 @@
 ﻿using UnityEngine;
 
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 namespace GGJ
 {
     [RequireComponent(typeof(BoxCollider2D))]
@@ -22,6 +26,21 @@ namespace GGJ
 
         bool isEnter;
         CameraFollow cameraFollow;
+
+#if UNITY_EDITOR
+        void OnDrawGizmos()
+        {
+            if (enableState == EnableState.Disable) {
+                if (focusTarget == null) {
+                    Handles.Label(transform.position, "No focus target..");
+                }
+                else {
+                    Handles.color = Color.red;
+                    Handles.DrawDottedLine(transform.position, focusTarget.position, 0.2f);
+                }
+            }
+        }
+#endif
 
         void Awake()
         {

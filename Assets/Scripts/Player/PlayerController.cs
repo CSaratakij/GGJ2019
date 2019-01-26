@@ -397,6 +397,9 @@ namespace GGJ
             if (collision.gameObject.CompareTag("Trophy")) {
                 GameController.GameStop();
             }
+            else if (collision.gameObject.CompareTag("House")) {
+                stat.FullRestore();
+            }
         }
 
         public void Reset()
