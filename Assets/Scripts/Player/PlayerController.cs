@@ -82,6 +82,8 @@ namespace GGJ
         bool isDead;
         bool isBeginOneWayCollision;
 
+        Animator anim;
+
         Vector2 velocity;
         Vector2 inputVector;
         Vector2 groundRaycastDirection;
@@ -127,6 +129,7 @@ namespace GGJ
         void Update()
         {
             InputHandler();
+            AnimationHandler();
             FlipHandler();
         }
 
@@ -138,6 +141,7 @@ namespace GGJ
 
         void Initialize()
         {
+            anim = GetComponent<Animator>();
             rigid = GetComponent<Rigidbody2D>();
             spriteRenderer = GetComponent<SpriteRenderer>();
             stat = GetComponent<Stat>();
@@ -220,6 +224,22 @@ namespace GGJ
             }
         }
 
+        void AnimationHandler()
+        {
+            if (isGrounded) {
+                if (inputVector.x == 0.0f)
+                    anim.Play("Idle");
+                else
+                    anim.Play("Walk");
+            }
+            else {
+                if (velocity.y > 0.0f)
+                    anim.Play("Jump");
+                else
+                    anim.Play("FallDown");
+            }
+        }
+
         void CheckHitEnemy()
         {
             if (isDead)
@@ -296,7 +316,7 @@ namespace GGJ
                     currentJumpVelocity += jumpForce * Time.fixedDeltaTime;
 
                     if (allowPlayJumpAudio) {
-
+                        anim.Play("Jump");
                         allowPlayJumpAudio = false;
                     }
                 }
