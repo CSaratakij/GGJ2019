@@ -65,7 +65,7 @@ namespace GGJ
             if (!IsStart)
                 return;
 
-            IsStart = false;
+            Reset();
             OnTimerStop?.Invoke();
         }
 

@@ -401,8 +401,6 @@ namespace GGJ
             }
             else if (collision.gameObject.CompareTag("House")) {
                 if (stat.Current < stat.Max) {
-                    //fade..
-                    //then
                     stat.FullRestore();
                 }
             }
@@ -410,6 +408,7 @@ namespace GGJ
 
         public void Reset()
         {
+            statManipulator.SetManipulate(StatManipulator.ManipulateState.None);
             stat.FullRestore();
             isDead = false;
         }

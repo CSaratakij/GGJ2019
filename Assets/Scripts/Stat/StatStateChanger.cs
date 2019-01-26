@@ -59,7 +59,7 @@ namespace GGJ
         {
             if (other.gameObject.CompareTag("Player")) {
                 stateManipulator.SetManipulate(state);
-                gameObject.SetActive(false);
+                //gameObject.SetActive(false);
             }
         }
     }
