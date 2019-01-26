@@ -392,6 +392,13 @@ namespace GGJ
             statManipulator.Stop();
         }
 
+        void OnTriggerEnter2D(Collider2D collision)
+        {
+            if (collision.gameObject.CompareTag("Trophy")) {
+                GameController.GameStop();
+            }
+        }
+
         public void Reset()
         {
             stat.FullRestore();
