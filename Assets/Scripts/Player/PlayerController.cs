@@ -9,6 +9,8 @@ namespace GGJ
 {
     public class PlayerController : MonoBehaviour
     {
+        public static int CheckpointID = 0;
+
         [SerializeField]
         float moveForce;
 
@@ -50,7 +52,6 @@ namespace GGJ
 
         [SerializeField]
         LayerMask enemyLayer;
-
 
         int totalJump;
         int totalCoin;
@@ -150,7 +151,7 @@ namespace GGJ
             //boxCastHeadSize = new Vector2(0.855f, 1.0f);
             boxCastHeadSize = new Vector2(0.455f, 0.5f);
             //boxCastBodySize = new Vector2(0.855f, 0.4f);
-            boxCastBodySize = new Vector2(0.455f, 0.4f);
+            boxCastBodySize = new Vector2(0.490f, 0.4f);
             flickeringColor = new Color(1.0f, 1.0f, 1.0f, 0.2f);
             flickeringWait = new WaitForSeconds(0.8f);
         }
@@ -177,7 +178,10 @@ namespace GGJ
             if (value <= 0.0f && !isDead) {
                 isDead = true;
                 spriteRenderer.sortingOrder = 1;
-                GameController.GameStop();
+
+                //Resetter reset?
+                Resetter.instance.Reset();
+                //GameController.GameStop();
             }
         }
 
@@ -372,6 +376,12 @@ namespace GGJ
         void OnGameStop()
         {
             statManipulator.Stop();
+        }
+
+        public void Reset()
+        {
+            stat.FullRestore();
+            isDead = false;
         }
     }
 }

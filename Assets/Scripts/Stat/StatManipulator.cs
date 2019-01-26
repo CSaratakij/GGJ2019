@@ -60,6 +60,8 @@ namespace GGJ
             switch (manipulalteState)
             {
                 case ManipulateState.None:
+                    //Hacks
+                    stat.Restore(0);
                     break;
 
                 case ManipulateState.DecreaseOverTime:

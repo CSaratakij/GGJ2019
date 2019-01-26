@@ -36,12 +36,14 @@ namespace GGJ
         {
             GameController.OnGameStart += OnGameStart;
             GameController.OnGameStop += OnGameStop;
+            Resetter.instance.OnReset += OnReset;
         }
 
         void UnsubscribeEvent()
         {
             GameController.OnGameStart -= OnGameStart;
             GameController.OnGameStop -= OnGameStop;
+            Resetter.instance.OnReset -= OnReset;
         }
 
         void OnGameStart()
@@ -66,6 +68,11 @@ namespace GGJ
         {
             HideAllMenu();
             panels[(int)menu].gameObject.SetActive(true);
+        }
+
+        void OnReset()
+        {
+            //
         }
     }
 }

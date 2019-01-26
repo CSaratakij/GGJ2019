@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1701491867345766279}
   m_Layer: 2
   m_Name: ScrollEnabler
-  m_TagString: Untagged
+  m_TagString: Resetable
   m_Icon: {fileID: 7250588514170254948, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -46,6 +46,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   isDisableOnContact: 1
   enableState: 0
+  focusTarget: {fileID: 0}
 --- !u!61 &1701491867345766279
 BoxCollider2D:
   m_ObjectHideFlags: 0
