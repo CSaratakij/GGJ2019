@@ -95,7 +95,6 @@ namespace GGJ
             player.transform.position = checkPoints[PlayerController.CheckpointID].position;
 
             Camera.main.transform.position = new Vector3(0.0f, player.transform.position.y, -10.0f);
-
             fadeController.FadeOut();
         }
     }
