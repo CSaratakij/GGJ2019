@@ -47,5 +47,14 @@ namespace GGJ
             spriteRenderer.sprite = sprites[PictureID];
             spriteRenderer.enabled = value;
         }
+
+        public void ChangeImage(int imageID)
+        {
+            if (imageID > sprites.Length - 1)
+                return;
+
+            PictureID = imageID;
+            spriteRenderer.sprite = sprites[imageID];
+        }
     }
 }

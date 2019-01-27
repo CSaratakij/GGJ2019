@@ -29,7 +29,10 @@ namespace GGJ
         public event _Func OnReset;
 
         PlayerController playerController;
+
         GameObject[] resetables;
+        GameObject[] resetableItemGood;
+        GameObject[] resetableItemBad;
 
 #if UNITY_EDITOR
         void OnDrawGizmos()
@@ -63,6 +66,8 @@ namespace GGJ
         {
             playerController = player.GetComponent<PlayerController>();
             resetables = GameObject.FindGameObjectsWithTag("Resetable");
+            resetableItemGood = GameObject.FindGameObjectsWithTag("GoodItem");
+            resetableItemBad = GameObject.FindGameObjectsWithTag("BadItem");
         }
 
         void MakeSingleton()
@@ -79,18 +84,28 @@ namespace GGJ
         {
             Camera.main.GetComponent<CameraFollow>().MakeScroll(false);
             fadeController.FadeIn();
-
-            foreach (GameObject obj in resetables)
-            {
-                obj.SetActive(true);
-            }
-
-            OnReset?.Invoke();
             timer.Countdown();
         }
 
         void OnTimerStop()
         {
+            foreach (GameObject obj in resetables)
+            {
+                obj.SetActive(true);
+            }
+
+            foreach (GameObject obj in resetableItemBad)
+            {
+                obj.SetActive(true);
+            }
+
+            foreach (GameObject obj in resetableItemGood)
+            {
+                obj.SetActive(true);
+            }
+
+            OnReset?.Invoke();
+
             playerController.Reset();
             player.transform.position = checkPoints[PlayerController.CheckpointID].position;
 

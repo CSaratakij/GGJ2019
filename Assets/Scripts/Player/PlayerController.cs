@@ -396,13 +396,26 @@ namespace GGJ
 
         void OnTriggerEnter2D(Collider2D collision)
         {
-            if (collision.gameObject.CompareTag("Trophy")) {
+            if (collision.gameObject.CompareTag("Trophy"))
+            {
                 GameController.GameStop();
             }
-            else if (collision.gameObject.CompareTag("House")) {
-                if (stat.Current < stat.Max) {
+            else if (collision.gameObject.CompareTag("House"))
+            {
+                if (stat.Current < stat.Max)
+                {
                     stat.FullRestore();
                 }
+            }
+            else if (collision.gameObject.CompareTag("GoodItem"))
+            {
+                stat.Restore(20);
+                collision.gameObject.SetActive(false);
+            }
+            else if (collision.gameObject.CompareTag("BadItem"))
+            {
+                stat.Remove(30);
+                collision.gameObject.SetActive(false);
             }
         }
 
