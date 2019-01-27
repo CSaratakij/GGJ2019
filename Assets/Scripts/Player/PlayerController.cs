@@ -414,7 +414,7 @@ namespace GGJ
             }
             else if (collision.gameObject.CompareTag("BadItem"))
             {
-                stat.Remove(10);
+                stat.Remove(15);
                 collision.gameObject.SetActive(false);
             }
         }

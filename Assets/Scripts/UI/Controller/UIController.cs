@@ -53,6 +53,8 @@ namespace GGJ
 
         void OnGameStop()
         {
+            //Hacks
+            Camera.main.GetComponent<CameraFollow>().MakeScroll(false);
             Show(Menu.GameOverMenu);
         }
 
