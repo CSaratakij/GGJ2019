@@ -409,12 +409,12 @@ namespace GGJ
             }
             else if (collision.gameObject.CompareTag("GoodItem"))
             {
-                stat.Restore(20);
+                stat.Restore(30);
                 collision.gameObject.SetActive(false);
             }
             else if (collision.gameObject.CompareTag("BadItem"))
             {
-                stat.Remove(30);
+                stat.Remove(10);
                 collision.gameObject.SetActive(false);
             }
         }

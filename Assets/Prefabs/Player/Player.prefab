@@ -177,7 +177,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7a3915537485c934eac29a77ab990837, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  moveForce: 520
+  moveForce: 480
   jumpForce: 820
   maxJumpVelocity: 130
   onGroundGravity: 200
@@ -229,7 +229,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   manipulalteState: 1
   decreaseRate: 1
-  decreaseValue: 3
+  decreaseValue: 5
   increaseRate: 1
   increaseValue: 1
 --- !u!95 &8356069899856973549
